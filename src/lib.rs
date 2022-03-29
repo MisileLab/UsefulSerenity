@@ -1,5 +1,13 @@
-use serenity::builder::{CreateInteractionResponse, CreateInteractionResponseData, CreateEmbed};
-use serenity::model::prelude::{InteractionApplicationCommandCallbackDataFlags, InteractionResponseType};
+use serenity::builder::{
+    CreateInteractionResponse, 
+    CreateInteractionResponseData, CreateEmbed
+};
+
+use serenity::model::prelude::{
+    InteractionApplicationCommandCallbackDataFlags, 
+    InteractionResponseType
+};
+
 
 struct ResponseStruct {
     response: CreateInteractionResponse,
