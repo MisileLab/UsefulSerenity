@@ -1,63 +1,56 @@
 use serenity::builder::{
-    CreateInteractionResponse, 
-    CreateInteractionResponseData, CreateEmbed
+    CreateInteractionResponseData, 
+    CreateEmbed
 };
 
 use serenity::model::prelude::{
-    InteractionApplicationCommandCallbackDataFlags, 
-    InteractionResponseType
+    InteractionApplicationCommandCallbackDataFlags
 };
 
 
 pub struct ResponseStruct {
-    response: CreateInteractionResponse,
-    responsecontent: CreateInteractionResponseData,
-    embed: Option<CreateEmbed>
+    pub responsedata: CreateInteractionResponseData,
 }
 
 pub trait ResponseTrait {
     fn set_content(&self, content: String) -> ResponseStruct;
     fn add_flag(&self, flag: InteractionApplicationCommandCallbackDataFlags) -> ResponseStruct;
-    fn change_kind(&self, kind: InteractionResponseType) -> ResponseStruct;
-    fn set_embed(&self, embed: CreateEmbed) -> ResponseStruct;
+    fn add_embed(&self, embed: CreateEmbed) -> ResponseStruct;
+    fn add_embeds(&self, embeds: Vec<CreateEmbed>) -> ResponseStruct;
 }
 
 impl ResponseTrait for ResponseStruct {
     fn set_content(&self, content: String) -> ResponseStruct {
-        let mut resp = self.responsecontent.clone();
+        let mut resp = self.responsedata.clone();
         resp.content(content);
         return ResponseStruct {
-            response: self.response.clone(),
-            responsecontent: resp,
-            embed: self.embed.clone()
+            responsedata: resp,
         }
     }
 
     fn add_flag(&self, flag: InteractionApplicationCommandCallbackDataFlags) -> ResponseStruct {
-        let mut resp = self.responsecontent.clone();
+        let mut resp = self.responsedata.clone();
         resp.flags(flag);
         return ResponseStruct {
-            response: self.response.clone(),
-            responsecontent: resp,
-            embed: self.embed.clone()
+            responsedata: resp,
         }
     }
 
-    fn change_kind(&self, kind: InteractionResponseType) -> ResponseStruct {
-        let mut resp = self.response.clone();
-        resp.kind(kind);
+    fn add_embed(&self, embed: CreateEmbed) -> ResponseStruct {
+        let mut resp = self.responsedata.clone();
+        resp.add_embed(embed);
         return ResponseStruct {
-            response: resp,
-            responsecontent: self.responsecontent.clone(),
-            embed: self.embed.clone()
+            responsedata: self.responsedata.clone()
         }
     }
 
-    fn set_embed(&self, embed: CreateEmbed) -> ResponseStruct {
-        return ResponseStruct {
-            response: self.response.clone(),
-            responsecontent: self.responsecontent.clone(),
-            embed: Some(embed)
-            }
+    fn add_embeds(&self, embeds: Vec<CreateEmbed>) -> ResponseStruct {
+        let mut resp = self.responsedata.clone();
+        for embed in embeds {
+            resp.add_embed(embed);
         }
+        return ResponseStruct {
+            responsedata: self.responsedata.clone()
+        }
+    }
 }
