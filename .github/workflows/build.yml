@@ -1,12 +1,9 @@
 name: test
 
 on:
-  push:
-    paths:
-      - '.github/workflows/build.yml'
-      - 'src/'
-      - 'cargo.toml'
-      - 'cargo.lock'
+  create:
+    tags:
+      - v*
 
 env:
   CARGO_TERM_COLOR: always
@@ -35,3 +32,7 @@ jobs:
           !target/release/incremental
           !target/release/.cargo-lock
           !target/release/*.d
+    - name: cargo publish
+      run: |
+        cargo login ${{ secrets.cargo_token }}
+        cargo publish
