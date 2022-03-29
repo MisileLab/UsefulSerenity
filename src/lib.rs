@@ -45,11 +45,11 @@ impl ResponseTrait for ResponseStruct {
         }
     }
 
-  fn set_embed(&self, embed: CreateEmbed) -> ResponseStruct {
-      return ResponseStruct {
-          response: self.response.clone(),
-          responsecontent: self.responsecontent.clone(),
-          embed: Some(embed)
-      }
-  }
+fn set_embed(&self, embed: CreateEmbed) -> ResponseStruct {
+    return ResponseStruct {
+        response: self.response.clone(),
+        responsecontent: self.responsecontent.clone(),
+        embed: Some(embed)
+        }
+    }
 }
