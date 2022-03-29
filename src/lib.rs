@@ -9,13 +9,13 @@ use serenity::model::prelude::{
 };
 
 
-struct ResponseStruct {
+pub struct ResponseStruct {
     response: CreateInteractionResponse,
     responsecontent: CreateInteractionResponseData,
     embed: Option<CreateEmbed>
 }
 
-trait ResponseTrait {
+pub trait ResponseTrait {
     fn set_content(&self, content: String) -> ResponseStruct;
     fn add_flag(&self, flag: InteractionApplicationCommandCallbackDataFlags) -> ResponseStruct;
     fn change_kind(&self, kind: InteractionResponseType) -> ResponseStruct;
@@ -53,11 +53,11 @@ impl ResponseTrait for ResponseStruct {
         }
     }
 
-fn set_embed(&self, embed: CreateEmbed) -> ResponseStruct {
-    return ResponseStruct {
-        response: self.response.clone(),
-        responsecontent: self.responsecontent.clone(),
-        embed: Some(embed)
+    fn set_embed(&self, embed: CreateEmbed) -> ResponseStruct {
+        return ResponseStruct {
+            response: self.response.clone(),
+            responsecontent: self.responsecontent.clone(),
+            embed: Some(embed)
+            }
         }
-    }
 }
