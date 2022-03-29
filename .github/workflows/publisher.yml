@@ -1,0 +1,17 @@
+name: publish
+
+on:
+  create:
+    tags:
+      - v*
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: cargo publish
+      run: |
+        cargo login ${{ secrets.cargo_token }}
+        cargo publish
