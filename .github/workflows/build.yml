@@ -32,7 +32,3 @@ jobs:
           !target/release/incremental
           !target/release/.cargo-lock
           !target/release/*.d
-    - name: cargo publish
-      run: |
-        cargo login ${{ secrets.cargo_token }}
-        cargo publish
