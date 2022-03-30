@@ -8,8 +8,8 @@ use serenity::model::prelude::{
 };
 
 
-pub struct ResponseStruct {
-    pub responsedata: CreateInteractionResponseData,
+pub struct ResponseStruct<'a> {
+    pub responsedata: &'a mut CreateInteractionResponseData,
 }
 
 pub trait ResponseTrait {
@@ -19,38 +19,38 @@ pub trait ResponseTrait {
     fn add_embeds(&self, embeds: Vec<CreateEmbed>) -> ResponseStruct;
 }
 
-impl ResponseTrait for ResponseStruct {
+impl ResponseTrait for ResponseStruct<'_> {
     fn set_content(&self, content: String) -> ResponseStruct {
-        let mut resp = self.responsedata.clone();
+        let resp = self.responsedata;
         resp.content(content);
         return ResponseStruct {
-            responsedata: resp,
+            responsedata: resp
         }
     }
 
     fn add_flag(&self, flag: InteractionApplicationCommandCallbackDataFlags) -> ResponseStruct {
-        let mut resp = self.responsedata.clone();
+        let resp = self.responsedata;
         resp.flags(flag);
         return ResponseStruct {
-            responsedata: resp,
+            responsedata: resp
         }
     }
 
     fn add_embed(&self, embed: CreateEmbed) -> ResponseStruct {
-        let mut resp = self.responsedata.clone();
+        let resp = self.responsedata;
         resp.add_embed(embed);
         return ResponseStruct {
-            responsedata: self.responsedata.clone()
+            responsedata: resp
         }
     }
 
     fn add_embeds(&self, embeds: Vec<CreateEmbed>) -> ResponseStruct {
-        let mut resp = self.responsedata.clone();
+        let resp = self.responsedata;
         for embed in embeds {
             resp.add_embed(embed);
         }
         return ResponseStruct {
-            responsedata: self.responsedata.clone()
+            responsedata: resp
         }
     }
 }
