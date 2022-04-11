@@ -1,6 +1,8 @@
+use serenity::builder::CreateEmbed;
+
 /// Vec<(content: String, description: String, inline: bool)>
-fn embed_converter(embeds: Vec<(String, String, bool)>) -> serenity::CreateEmbed {
-    let mut embed = serenity::CreateEmbed::default();
+pub fn add_embeds(embeds: Vec<(String, String, bool)>) -> CreateEmbed {
+    let mut embed = CreateEmbed::default();
     embed.fields(embeds);
     return embed;
 }
