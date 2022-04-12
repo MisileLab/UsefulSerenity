@@ -13,4 +13,4 @@ edition = "2021"
 [dependencies]
 mongodb = "2.1.0"
 serde = "1.0"
-serenity = "0.10.10"
+serenity = { git = "https://github.com/serenity-rs/serenity", branch = "next" }
