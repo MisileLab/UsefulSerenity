@@ -15,7 +15,8 @@ mongodb = "2.2.0"
 serde = "1.0"
 
 [dependencies.serenity]
-default-features = false
-features = ["builder", "cache", "client", "gateway", "model", "utils", "collector", "chrono"]
 branch = "next"
 git = "https://github.com/serenity-rs/serenity"
+
+[features]
+default = ["serenity/rustls_backend"]
