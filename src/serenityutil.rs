@@ -1,4 +1,4 @@
-use serenity::builder::CreateEmbed;
+use poise::serenity_prelude as serenity;
 
 /// Vec<(content: String, description: String, inline: bool)>
 pub fn add_fields(embeds: Vec<(String, String, bool)>) -> CreateEmbed {
