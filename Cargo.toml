@@ -13,12 +13,4 @@ edition = "2021"
 [dependencies]
 mongodb = "2.2.0"
 serde = "1.0"
-
-[dependencies.serenity]
-branch = "next"
-git = "https://github.com/serenity-rs/serenity"
-default-features = false
-features = ["builder", "cache", "client", "gateway", "model", "utils", "collector", "chrono"]
-
-[features]
-default = ["serenity/rustls_backend"]
+poise = { git = "https://github.com/kangalioo/poise", branch = "develop" }
