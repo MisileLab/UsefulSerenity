@@ -13,7 +13,6 @@ edition = "2021"
 [dependencies]
 mongodb = "2.2.0"
 serde = "1.0"
-serenity = { git = "https://github.com/serenity-rs/serenity", branch = "next" }
 
 [dependencies.serenity]
 default-features = false
